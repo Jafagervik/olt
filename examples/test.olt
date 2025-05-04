@@ -1,0 +1,10 @@
+import "std"
+
+// This is a test
+
+main :: () {
+    hello :: "HELLO"
+    world :: "WORLD"
+    std.print(hello, " ")
+    std.println(world)
+}

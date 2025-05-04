@@ -1,0 +1,19 @@
+
+import "std"
+
+RGBA :: struct {
+    red   : u8
+    green : u8
+    blue  : u8
+    alpha : u8
+}
+
+add_red :: (rgba: *RGBA, red_value: u8) {
+    rgba.red += red_value
+}
+
+main :: () {
+    red := RGBA{red=255, green=0, blue=0, alpha=0}
+
+    std.println(red)
+}

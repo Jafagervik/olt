@@ -1,0 +1,89 @@
+import "std"
+
+Direction :: enum {
+    North,
+    South,
+    East,
+    West,
+}
+
+Cards :: enum {
+    Heart = 10,
+    Club = 20, 
+    Diamond = 30,
+    Spade = 40,
+}
+
+Color :: struct<T> {
+    Red : T
+    Green : T
+    Blue : T
+}
+
+// Generic add method
+sum<T> :: (a, b: T) -> T {
+    ret a + b
+}
+
+
+product<T> :: (a, b: T) -> T {
+    return a * b 
+}
+
+default_params_sum<T> :: (a = 1, b = 3: T) -> T {
+    return a + b
+}
+
+// CONSTANT at COMPILE TIME 
+PI :: 3.14159265358
+
+main :: () {
+    // Immutable variable (same as const)
+    a :: 2
+
+    // Not Allowed
+    a = 3
+
+    // Mutable variable (same as var, let, mut etc..)
+    b := 1
+
+    // Allowed
+    b = 2
+
+    b += 1
+
+    for i in 1..=10 {
+        std.println(i)
+    }
+
+    // Const array
+    elems :: [4]int{1,2,3,4}
+
+    for elem in elems {
+        std.println(elem)
+    }
+
+    // shorthand using pipes
+    elems |> iter() |> std.println()
+
+    sum_plus_two := elems |> iter() |> map(x -> x + 2) -> sum()
+
+    // Pipe operator turns dt into an iterator, and can use 
+    // functions as map, forEach println or others to apply to each elem in the
+    // stream
+
+    // or for certain types that can be iterated over
+
+    c :: true
+
+    b: int
+
+    if c {
+        b = 0
+    } else {
+        b = 1
+    }
+
+    // Shortcut
+    e := if c 0 else 1
+}

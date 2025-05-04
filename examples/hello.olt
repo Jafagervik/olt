@@ -1,0 +1,5 @@
+import "std"
+
+main :: () {
+    std.println("Hello World!")
+}

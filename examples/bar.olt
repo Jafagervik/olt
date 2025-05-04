@@ -1,0 +1,11 @@
+import "std"
+
+main :: () {
+    list := List<int>{1,2,3,4}
+
+    result :: list 
+        |> map(x -> x + 4)
+        |> sum()
+
+    std.println("Sum is: ", result)
+}

@@ -1,0 +1,6 @@
+Direction :: enum {
+    North = 1,
+    South, 
+    East,
+    West
+}
