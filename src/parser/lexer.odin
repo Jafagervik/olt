@@ -10,6 +10,7 @@ Lexer :: struct {
 	col:      int,
 }
 
+
 // Tokenize the input of a single file
 tokenize :: proc(lexer: ^Lexer) -> (tokens: [dynamic]Token) {
 	n := len(lexer.data)
@@ -193,6 +194,10 @@ tokenize :: proc(lexer: ^Lexer) -> (tokens: [dynamic]Token) {
 		case ';':
 			token_type = .SemiColon
 			lexeme = ";"
+		case '#':
+			// TODO: needs extra lexing i suppose
+			token_type = .Directive
+			lexeme = "#"
 		case '\'':
 			token_type = .Quote
 			lexeme = "'"
@@ -245,7 +250,12 @@ lex_strings :: proc(lexer: ^Lexer, tokens: ^[dynamic]Token) {
 
 		append(
 			tokens,
-			Token{type = token_type, literal = identifier, line = start_line, col = start_col},
+			Token {
+				type = token_type,
+				literal = identifier,
+				line = start_line,
+				col = start_col,
+			},
 		)
 	}
 
@@ -316,7 +326,7 @@ lex_numbers :: proc(lexer: ^Lexer, tokens: ^[dynamic]Token) {
 						advance(lexer) // Skip 'e'/'E'
 					}
 				}
-			} else if !((c >= '0' && c <= '9') || c == '_') {
+			} else if !(utils.is_numeric(c) || c == '_') {
 				break
 			}
 		}
@@ -326,7 +336,15 @@ lex_numbers :: proc(lexer: ^Lexer, tokens: ^[dynamic]Token) {
 
 	if start_pos < lexer.pos {
 		number := lexer.data[start_pos:lexer.pos]
-		append(tokens, Token{type = .Number, literal = number, col = start_col, line = start_line})
+		append(
+			tokens,
+			Token {
+				type = .Number,
+				literal = number,
+				col = start_col,
+				line = start_line,
+			},
+		)
 	}
 
 	regress(lexer) // Adjust position back since advance will be called in the main loop

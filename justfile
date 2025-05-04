@@ -6,6 +6,9 @@ alias af := allf
 alias ad := alld
 alias d := debug
 
+setup:
+    mkdir -p bin
+
 
 # Recipes
 alld fname: debug
@@ -26,5 +29,6 @@ run-file fname:
 clean:
     rm -rf ./bin/*
 
+# TODO: Fix this test
 test:
     odin test src/ && rm src.bin

@@ -87,9 +87,15 @@ TokenType :: enum u8 {
 	// Extras
 	Invalid,
 	Eof,
+	Directive,
 }
 
-Directives: [dynamic]string = {"inline", "no_inline", "no_bounds_check", "bounds_check"}
+Directives: [dynamic]string = {
+	"inline",
+	"no_inline",
+	"no_bounds_check",
+	"bounds_check",
+}
 
 // Token Keywords
 KEYWORDS: map[string]TokenType = {
